@@ -8,83 +8,84 @@
 <link rel="stylesheet" href="style.css">
 
 <script src="https://cdn.sheetjs.com/"/script>
+<script defer src="app.js"></script>
+
 </head>
 
 <body>
 
-<header class="hero">
-    <div>
-        <h1>UK Major Construction Projects Dashboard</h1>
-        <p>July 2026 GTM Dataset</p>
-    </div>
+<div class="header">
+    <h1>UK Major Construction Projects Dashboard</h1>
+    <p>July 2026 GTM Dataset</p>
+</div>
 
-    <a class="download-button"
-       href="UK%20Major%20Construction%20Projects%20GTM%20Workbook%20-%20July%202026.xlsx">
-       Download Workbook
-    </a>
-</header>
+<div class="summary">
 
-<section class="stats-grid">
-
-    <div class="stat-card">
-        <span id="projectsCount">0</span>
+    <div class="card">
+        <h2 id="projectsCount">0</h2>
         <p>Projects</p>
     </div>
 
-    <div class="stat-card">
-        <span id="contactsCount">0</span>
+    <div class="card">
+        <h2 id="contactsCount">0</h2>
         <p>Target Contacts</p>
     </div>
 
-    <div class="stat-card">
-        <span id="contractorsCount">0</span>
-        <p>Contractor / JV Records</p>
+    <div class="card">
+        <h2 id="contractorsCount">0</h2>
+        <p>Contractor JV Records</p>
     </div>
 
-</section>
+</div>
 
-<section class="search-box">
+<div class="search-panel">
 
     <input
+        id="searchBox"
         type="text"
-        id="globalSearch"
-        placeholder="Search projects, contacts, owners, contractors..."
+        placeholder="Search projects, contractors, contacts, owners..."
     >
 
-</section>
+</div>
 
-<section class="tabs">
+<div class="tabs">
 
-    <button class="tab active" data-tab="projects">
+    <button class="tab active" onclick="showTab('projects')">
         Project Pipeline
     </button>
 
-    <button class="tab" data-tab="contacts">
+    <button class="tab" onclick="showTab('contacts')">
         Target Contacts
     </button>
 
-    <button class="tab" data-tab="contractors">
+    <button class="tab" onclick="showTab('contractors')">
         Contractor JV Map
     </button>
 
-</section>
+</div>
 
-<section id="projects" class="tab-content active">
+<div id="projects" class="tab-content active">
     <h2>Project Pipeline</h2>
     <div id="projectsTable"></div>
-</section>
+</div>
 
-<section id="contacts" class="tab-content">
+<div id="contacts" class="tab-content">
     <h2>Target Contacts</h2>
     <div id="contactsTable"></div>
-</section>
+</div>
 
-<section id="contractors" class="tab-content">
+<div id="contractors" class="tab-content">
     <h2>Contractor JV Map</h2>
     <div id="contractorsTable"></div>
-</section>
+</div>
 
-<script src="app.js"></script>
+<div class="download-area">
+
+    UK%20Major%20Construction%20Projects%20GTM%20Workbook%20-%20July%202026.xlsx
+        Download Workbook
+    </a>
+
+</div>
 
 </body>
 </html>
