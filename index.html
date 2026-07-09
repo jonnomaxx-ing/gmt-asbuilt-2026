@@ -13,11 +13,11 @@
       <p class="eyebrow">July 2026 GTM Dataset</p>
       <h1>UK Major Construction Projects Dashboard</h1>
       <p class="subtitle">
-        Search major UK construction projects, owners, clients, delivery leads, contractors, JVs and public sources.
+        Search major UK construction projects, target contacts, contractors, JVs, owners and delivery partners.
       </p>
     </div>
 
-    <a class="download-button" href="UK%20Major%20Construction%20Projects%20GTM%20Workbook%20-%20July%202026.xlsx" download>
+    UK%20Major%20Construction%20Projects%20GTM%20Workbook%20-%20July%202026.xlsx
       Download workbook
     </a>
   </header>
@@ -38,46 +38,8 @@
   </section>
 
   <section class="control-panel">
-    <div class="search-wrap">
-      <label for="globalSearch">Search all data</label>
-      <input id="globalSearch" type="search" placeholder="Try Kier, nuclear, London, NHS, Sizewell, Laing O'Rourke..." />
-    </div>
-
-    <div class="filters">
-      <div>
-        <label for="sectorFilter">Sector</label>
-        <select id="sectorFilter">
-          <option value="">All sectors</option>
-        </select>
-      </div>
-
-      <div>
-        <label for="regionFilter">Region</label>
-        <select id="regionFilter">
-          <option value="">All regions</option>
-        </select>
-      </div>
-
-      <div>
-        <label for="priorityFilter">Priority</label>
-        <select id="priorityFilter">
-          <option value="">All priorities</option>
-        </select>
-      </div>
-
-      <button id="clearFilters" class="secondary-button">Clear filters</button>
-      <button id="exportButton" class="secondary-button">Export current view</button>
-    </div>
-  </section>
-
-  <section class="ask-panel">
-    <h2>Ask the data</h2>
-    <p>This searches the workbook locally in the browser. No Azure, database or API key required.</p>
-    <div class="ask-row">
-      <input id="askInput" type="text" placeholder="Example: Which projects involve Kier? Which projects are nuclear? What is in London?" />
-      <button id="askButton">Ask</button>
-    </div>
-    <div id="askAnswer" class="ask-answer"></div>
+    <label for="globalSearch">Search all data</label>
+    <input id="globalSearch" type="search" placeholder="Try Kier, Hinkley, nuclear, London, NHS, Laing O'Rourke..." />
   </section>
 
   <nav class="tabs">
@@ -88,44 +50,22 @@
 
   <main>
     <section id="projects" class="tab-content active">
-      <div class="section-heading">
-        <div>
-          <h2>Project Pipeline</h2>
-          <p id="projectsSummary">Loading projects...</p>
-        </div>
-      </div>
-      <div id="projectsTable"></div>
+      <h2>Project Pipeline</h2>
+      <div id="projectsTable">Loading...</div>
     </section>
 
     <section id="contacts" class="tab-content">
-      <div class="section-heading">
-        <div>
-          <h2>Target Contacts</h2>
-          <p id="contactsSummary">Loading contacts...</p>
-        </div>
-      </div>
-      <div id="contactsTable"></div>
+      <h2>Target Contacts</h2>
+      <div id="contactsTable">Loading...</div>
     </section>
 
     <section id="contractors" class="tab-content">
-      <div class="section-heading">
-        <div>
-          <h2>Contractor JV Map</h2>
-          <p id="contractorsSummary">Loading contractor records...</p>
-        </div>
-      </div>
-      <div id="contractorsTable"></div>
+      <h2>Contractor JV Map</h2>
+      <div id="contractorsTable">Loading...</div>
     </section>
   </main>
 
-  <div id="modal" class="modal hidden">
-    <div class="modal-content">
-      <button id="closeModal" class="close-button">×</button>
-      <div id="modalBody"></div>
-    </div>
-  </div>
-
-  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+  <script src="https://cdn.sheetjs.com/"/script>
   <script src="app.js"></script>
 </body>
 </html>
