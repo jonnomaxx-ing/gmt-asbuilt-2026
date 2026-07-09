@@ -16,16 +16,12 @@ async function loadCSV(file) {
 
 async function loadAllData() {
     const projects = await loadCSV("ProjectPipeline.csv");
-    const contacts = await loadCSV("TargetContacts.csv");
-    const contractors = await loadCSV("ContractorJVMap.csv");
 
     document.getElementById("projectsCount").innerText = projects.length;
-    document.getElementById("contactsCount").innerText = contacts.length;
-    document.getElementById("contractorsCount").innerText = contractors.length;
 
     const container = document.getElementById("results");
 
-    projects.slice(0, 20).forEach(project => {
+    projects.forEach(project => {
         const div = document.createElement("div");
 
         div.className = "card";
