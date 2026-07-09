@@ -1,38 +1,69 @@
-async function loadCSV(file) {
-    const response = await fetch(file);
-    const text = await response.text();
+const WORKBOOK_FILE = "UK Major Construction Projects GTM Workbook - July 2026.xlsx";
 
-    const rows = text.trim().split("\n");
-    const headers = rows[0].split(",");
+const SHEETS = {
+  projects: "Project Pipeline",
+  contacts: "Target Contacts",
+  contractors: "Contractor JV Map"
+};
 
-    return rows.slice(1).map(row => {
-        const values = row.split(",");
-        return headers.reduce((obj, header, index) => {
-            obj[header.trim()] = values[index] || "";
-            return obj;
-        }, {});
-    });
-}
+const state = {
+  projects: [],
+  contacts: [],
+  contractors: [],
+  activeTab: "projects",
+  search: "",
+  sector: "",
+  region: "",
+  priority: "",
+  sort: {
+    projects: { key: "", direction: "asc" },
+    contacts: { key: "", direction: "asc" },
+    contractors: { key: "", direction: "asc" }
+  }
+};
 
-async function loadAllData() {
-    const projects = await loadCSV("ProjectPipeline.csv");
+const visibleColumns = {
+  projects: [
+    "Priority",
+    "Project",
+    "Sector",
+    "Region",
+    "Owner / Client",
+    "Estimated value",
+    "Stage as of Jul 2026",
+    "Delivery window",
+    "Tier 1 contractor / JV / consortium"
+  ],
+  contacts: [
+    "Project",
+    "Research area",
+    "Owner / Client",
+    "Known owners / delivery leads",
+    "LinkedIn / public profile if available"
+  ],
+  contractors: [
+    "Project",
+    "Research area",
+    "Owner / Client",
+    "Tier 1 contractor / JV / consortium",
+    "JV / partners aligned"
+  ]
+};
 
-    document.getElementById("projectsCount").innerText = projects.length;
+document.addEventListener("DOMContentLoaded", async () => {
+  wireEvents();
+  await loadWorkbook();
+  hydrateFilters();
+  renderAll();
+});
 
-    const container = document.getElementById("results");
+function wireEvents() {
+  document.querySelectorAll(".tab").forEach(button => {
+    button.addEventListener("click", () => {
+      state.activeTab = button.dataset.tab;
 
-    projects.forEach(project => {
-        const div = document.createElement("div");
+      document.querySelectorAll(".tab").forEach(tab => tab.classList.remove("active"));
+      document.querySelectorAll(".tab-content").forEach(section => section.classList.remove("active"));
 
-        div.className = "card";
-
-        div.innerHTML = `
-            <h3>${project.Project || "Project"}</h3>
-            <p>${project["Owner / Client"] || ""}</p>
-        `;
-
-        container.appendChild(div);
-    });
-}
-
-loadAllData();
+      button.classList.add("active");
+      document.getElementById(state.activeTab).
