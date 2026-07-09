@@ -1,43 +1,67 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UK Major Construction Projects Dashboard</title>
-    style.css
+
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="header">
-    <h1>UK Major Construction Projects Dashboard</h1>
-    <p>July 2026 GTM Dataset</p>
-</div>
-
-<div class="stats">
-
-    <div class="card">
-        <h2 id="projectsCount">0</h2>
-        <p>Projects</p>
+    <div class="header">
+        <h1>UK Major Construction Projects Dashboard</h1>
+        <p>July 2026 GTM Dataset</p>
     </div>
 
-    <div class="card">
-        <h2 id="contactsCount">0</h2>
-        <p>Contacts</p>
+    <div class="stats">
+
+        <div class="card">
+            <h2 id="projectsCount">0</h2>
+            <p>Projects</p>
+        </div>
+
+        <div class="card">
+            <h2 id="contactsCount">0</h2>
+            <p>Contacts</p>
+        </div>
+
+        <div class="card">
+            <h2 id="contractorsCount">0</h2>
+            <p>Contractor Records</p>
+        </div>
+
     </div>
 
-    <div class="card">
-        <h2 id="contractorsCount">0</h2>
-        <p>Contractor Records</p>
+    <div class="search-container">
+        <input type="text" id="searchBox" placeholder="Search projects, contacts, contractors...">
     </div>
 
-</div>
+    <div class="tabs">
+        <button onclick="showTab('projects')">Project Pipeline</button>
+        <button onclick="showTab('contacts')">Target Contacts</button>
+        <button onclick="showTab('contractors')">Contractor JV Map</button>
+    </div>
 
-<h2>Project Pipeline</h2>
+    <div id="projects" class="tabcontent">
+        <h2>Project Pipeline</h2>
+        <div id="projectsTable"></div>
+    </div>
 
-<div id="results"></div>
+    <div id="contacts" class="tabcontent" style="display:none;">
+        <h2>Target Contacts</h2>
+        <div id="contactsTable"></div>
+    </div>
 
-app.jsscript>
+    <div id="contractors" class="tabcontent" style="display:none;">
+        <h2>Contractor JV Map</h2>
+        <div id="contractorsTable"></div>
+    </div>
+
+    <script src="https://cdn.sheetjs.com/"/script>
+    <script src="app.js"></script>
 
 </body>
-
 </html>
