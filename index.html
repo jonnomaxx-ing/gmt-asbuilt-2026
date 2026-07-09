@@ -1,39 +1,9 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <h1>UK Major Construction Projects Dashboard</h1>
-    <style>
-        body {
-            font-family: Segoe UI, Arial, sans-serif;
-            background: #f3f6f9;
-            margin: 0;
-            padding: 20px;
-        }
-
-        .header {
-            background: #0078d4;
-            color: white;
-            padding: 20px;
-            border-radius: 8px;
-        }
-
-        .card {
-            background: white;
-            margin-top: 20px;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        .button {
-            display: inline-block;
-            background: #0078d4;
-            color: white;
-            padding: 10px 15px;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-    </style>
+    <title>UK Major Construction Projects Dashboard</title>
+    style.css
 </head>
 
 <body>
@@ -43,26 +13,31 @@
     <p>July 2026 GTM Dataset</p>
 </div>
 
-<div class="card">
-    <h2>Project Pipeline</h2>
-    <p>46 major UK construction projects.</p>
+<div class="stats">
+
+    <div class="card">
+        <h2 id="projectsCount">0</h2>
+        <p>Projects</p>
+    </div>
+
+    <div class="card">
+        <h2 id="contactsCount">0</h2>
+        <p>Contacts</p>
+    </div>
+
+    <div class="card">
+        <h2 id="contractorsCount">0</h2>
+        <p>Contractor Records</p>
+    </div>
+
 </div>
 
-<div class="card">
-    <h2>Target Contacts</h2>
-    <p>40 strategic stakeholder records.</p>
-</div>
+<h2>Project Pipeline</h2>
 
-<div class="card">
-    <h2>Contractor JV Map</h2>
-    <p>44 contractor and consortium relationships.</p>
-</div>
+<div id="results"></div>
 
-<div class="card">
-    UK%20Major%20Construction%20Projects%20GTM%20Workbook%20-%20July%202026.xlsx
-        Download Workbook
-    </a>
-</div>
+app.jsscript>
 
 </body>
+
 </html>
