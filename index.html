@@ -1,70 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>UK Major Construction Projects Dashboard</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UK Major Construction Projects Dashboard</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdn.sheetjs.com/"/script>
 </head>
 
 <body>
-  <header class="hero">
+
+<header class="hero">
     <div>
-      <p class="eyebrow">July 2026 GTM Dataset</p>
-      <h1>UK Major Construction Projects Dashboard</h1>
-      <p class="subtitle">
-        Search major UK construction projects, target contacts, contractors, JVs, owners and delivery partners.
-      </p>
+        <h1>UK Major Construction Projects Dashboard</h1>
+        <p>July 2026 GTM Dataset</p>
     </div>
 
-    UK%20Major%20Construction%20Projects%20GTM%20Workbook%20-%20July%202026.xlsx
-      Download workbook
+    <a class="download-button"
+       href="UK%20Major%20Construction%20Projects%20GTM%20Workbook%20-%20July%202026.xlsx">
+       Download Workbook
     </a>
-  </header>
+</header>
 
-  <section class="stats-grid">
+<section class="stats-grid">
+
     <div class="stat-card">
-      <span id="projectsCount">0</span>
-      <p>Projects</p>
+        <span id="projectsCount">0</span>
+        <p>Projects</p>
     </div>
+
     <div class="stat-card">
-      <span id="contactsCount">0</span>
-      <p>Target contacts</p>
+        <span id="contactsCount">0</span>
+        <p>Target Contacts</p>
     </div>
+
     <div class="stat-card">
-      <span id="contractorsCount">0</span>
-      <p>Contractor / JV records</p>
+        <span id="contractorsCount">0</span>
+        <p>Contractor / JV Records</p>
     </div>
-  </section>
 
-  <section class="control-panel">
-    <label for="globalSearch">Search all data</label>
-    <input id="globalSearch" type="search" placeholder="Try Kier, Hinkley, nuclear, London, NHS, Laing O'Rourke..." />
-  </section>
+</section>
 
-  <nav class="tabs">
-    <button class="tab active" data-tab="projects">Project Pipeline</button>
-    <button class="tab" data-tab="contacts">Target Contacts</button>
-    <button class="tab" data-tab="contractors">Contractor JV Map</button>
-  </nav>
+<section class="search-box">
 
-  <main>
-    <section id="projects" class="tab-content active">
-      <h2>Project Pipeline</h2>
-      <div id="projectsTable">Loading...</div>
-    </section>
+    <input
+        type="text"
+        id="globalSearch"
+        placeholder="Search projects, contacts, owners, contractors..."
+    >
 
-    <section id="contacts" class="tab-content">
-      <h2>Target Contacts</h2>
-      <div id="contactsTable">Loading...</div>
-    </section>
+</section>
 
-    <section id="contractors" class="tab-content">
-      <h2>Contractor JV Map</h2>
-      <div id="contractorsTable">Loading...</div>
-    </section>
-  </main>
+<section class="tabs">
 
-<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"script>
+    <button class="tab active" data-tab="projects">
+        Project Pipeline
+    </button>
+
+    <button class="tab" data-tab="contacts">
+        Target Contacts
+    </button>
+
+    <button class="tab" data-tab="contractors">
+        Contractor JV Map
+    </button>
+
+</section>
+
+<section id="projects" class="tab-content active">
+    <h2>Project Pipeline</h2>
+    <div id="projectsTable"></div>
+</section>
+
+<section id="contacts" class="tab-content">
+    <h2>Target Contacts</h2>
+    <div id="contactsTable"></div>
+</section>
+
+<section id="contractors" class="tab-content">
+    <h2>Contractor JV Map</h2>
+    <div id="contractorsTable"></div>
+</section>
+
+<script src="app.js"></script>
+
 </body>
 </html>
