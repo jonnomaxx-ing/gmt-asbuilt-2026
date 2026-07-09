@@ -1,67 +1,392 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UK Major Construction Projects Dashboard</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UK Major Construction Projects Dashboard</title>
 
-    <link rel="stylesheet" href="style.css">
+  <style>
+    :root {
+      --blue: #0078d4;
+      --blue-dark: #005a9e;
+      --bg: #f3f6f9;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #64748b;
+      --border: #d7e1ec;
+      --shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 24px;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .hero {
+      background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+      color: white;
+      padding: 32px;
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: flex-start;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(32px, 5vw, 52px);
+      line-height: 1.05;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+      opacity: 0.9;
+    }
+
+    .subtitle {
+      max-width: 900px;
+      font-size: 18px;
+      margin: 16px 0 0;
+      opacity: 0.95;
+    }
+
+    .download-button {
+      background: white;
+      color: var(--blue-dark);
+      padding: 12px 16px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .stat-card,
+    .panel,
+    .tab-content {
+      background: var(--card);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .stat-card {
+      padding: 22px;
+    }
+
+    .stat-card span {
+      display: block;
+      color: var(--blue);
+      font-size: 38px;
+      font-weight: 800;
+    }
+
+    .stat-card p {
+      margin: 4px 0 0;
+      color: var(--muted);
+    }
+
+    .panel {
+      padding: 22px;
+      margin-bottom: 18px;
+    }
+
+    label {
+      font-weight: 700;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 15px;
+      background: white;
+    }
+
+    .filters {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+      align-items: end;
+      margin-top: 16px;
+    }
+
+    button {
+      cursor: pointer;
+      border: 0;
+      border-radius: 10px;
+      padding: 12px 14px;
+      background: var(--blue);
+      color: white;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    button:hover {
+      background: var(--blue-dark);
+    }
+
+    .ask-row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .ask-answer {
+      margin-top: 14px;
+      padding: 14px;
+      background: #eef6fc;
+      border-left: 4px solid var(--blue);
+      border-radius: 10px;
+      display: none;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 18px 0;
+    }
+
+    .tab {
+      background: white;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .tab.active {
+      background: var(--blue);
+      color: white;
+      border-color: var(--blue);
+    }
+
+    .tab-content {
+      display: none;
+      padding: 22px;
+      margin-bottom: 22px;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+    }
+
+    .section-heading p {
+      margin: 6px 0 14px;
+      color: var(--muted);
+    }
+
+    .table-wrap {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      min-width: 1100px;
+      border-collapse: collapse;
+      background: white;
+    }
+
+    th,
+    td {
+      padding: 12px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+    }
+
+    th {
+      background: #eef4fb;
+      cursor: pointer;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    tr:hover td {
+      background: #f8fbff;
+    }
+
+    .project-link {
+      color: var(--blue-dark);
+      font-weight: 700;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 8px;
+      background: #e8f3ff;
+      color: var(--blue-dark);
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    .empty {
+      padding: 24px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.6);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px 20px;
+      overflow-y: auto;
+      z-index: 999;
+    }
+
+    .modal.hidden {
+      display: none;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 18px;
+      padding: 28px;
+      width: min(1100px, 100%);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.24);
+      position: relative;
+    }
+
+    .close-button {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 40px;
+      height: 40px;
+      color: var(--text);
+      background: #f1f5f9;
+      font-size: 26px;
+      line-height: 1;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .detail-item,
+    .related-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+    }
+
+    .detail-item strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .related-section {
+      margin-top: 22px;
+    }
+
+    .related-card {
+      margin-top: 10px;
+    }
+
+    a {
+      color: var(--blue-dark);
+    }
+
+    @media (max-width: 900px) {
+      body {
+        padding: 14px;
+      }
+
+      .hero {
+        display: block;
+      }
+
+      .download-button {
+        display: inline-block;
+        margin-top: 18px;
+      }
+
+      .stats,
+      .filters,
+      .detail-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .ask-row {
+        flex-direction: column;
+      }
+
+      table {
+        min-width: 900px;
+      }
+    }
+  </style>
 </head>
 
 <body>
-
-    <div class="header">
-        <h1>UK Major Construction Projects Dashboard</h1>
-        <p>July 2026 GTM Dataset</p>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">July 2026 GTM Dataset</p>
+      <h1>UK Major Construction Projects Dashboard</h1>
+      <p class="subtitle">
+        Search UK construction projects, owners, target contacts, contractors, JVs and delivery partners from the Excel workbook.
+      </p>
     </div>
 
-    <div class="stats">
+    UK%20Major%20Construction%20Projects%20GTM%20Workbook%20-%20July%202026.xlsx
+      Download workbook
+    </a>
+  </header>
 
-        <div class="card">
-            <h2 id="projectsCount">0</h2>
-            <p>Projects</p>
-        </div>
-
-        <div class="card">
-            <h2 id="contactsCount">0</h2>
-            <p>Contacts</p>
-        </div>
-
-        <div class="card">
-            <h2 id="contractorsCount">0</h2>
-            <p>Contractor Records</p>
-        </div>
-
+  <section class="stats">
+    <div class="stat-card">
+      <span id="projectsCount">0</span>
+      <p>Projects</p>
     </div>
-
-    <div class="search-container">
-        <input type="text" id="searchBox" placeholder="Search projects, contacts, contractors...">
+    <div class="stat-card">
+      <span id="contactsCount">0</span>
+      <p>Target contacts</p>
     </div>
-
-    <div class="tabs">
-        <button onclick="showTab('projects')">Project Pipeline</button>
-        <button onclick="showTab('contacts')">Target Contacts</button>
-        <button onclick="showTab('contractors')">Contractor JV Map</button>
+    <div class="stat-card">
+      <span id="contractorsCount">0</span>
+      <p>Contractor / JV records</p>
     </div>
+  </section>
 
-    <div id="projects" class="tabcontent">
-        <h2>Project Pipeline</h2>
-        <div id="projectsTable"></div>
-    </div>
+  <section class="panel">
+    <label for="globalSearch">Search all data</label>
+    <input id="globalSearch" type="search" placeholder="Try Kier, nuclear, London, NHS, Sizewell, Laing O'Rourke..." />
 
-    <div id="contacts" class="tabcontent" style="display:none;">
-        <h2>Target Contacts</h2>
-        <div id="contactsTable"></div>
-    </div>
-
-    <div id="contractors" class="tabcontent" style="display:none;">
-        <h2>Contractor JV Map</h2>
-        <div id="contractorsTable"></div>
-    </div>
-
-   <script src="https://cdn.sheetjs.com/"/script>
-   <script src="app.js"></script>
-
-</body>
-</html>
+    <div class="
